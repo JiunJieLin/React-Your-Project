@@ -4,7 +4,7 @@ import Modal from "./Modal.jsx";
 
 //按下Save的時候要擷取所有input的value，再把value往父層傳
 //在這一層下ref，用props的方式傳給Input來接收下層的value，Input層下forwardRef
-const NewProject = ({ onAdd }) => {
+const NewProject = ({ onAdd, onCancel }) => {
   const modal = useRef();
 
   const title = useRef();
@@ -37,7 +37,10 @@ const NewProject = ({ onAdd }) => {
         <p>確保每個欄位輸入資訊正確</p>
       </Modal>
       <div className="mt-16 flex justify-end">
-        <button className="rounded-lg px-8 py-4 text-gray-400 hover:bg-slate-300">
+        <button
+          className="rounded-lg px-8 py-4 text-gray-400 hover:bg-slate-300"
+          onClick={onCancel}
+        >
           Cancel
         </button>
         <button
