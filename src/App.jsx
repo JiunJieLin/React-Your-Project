@@ -23,11 +23,11 @@ const Home = () => {
       };
       return {
         ...prevState,
+        selectedProjectId: undefined,
         projects: [...prevState.projects, newProject],
       };
     });
   };
-  console.log(projectState);
 
   let content;
   if (projectState.selectedProjectId === null) {
@@ -38,7 +38,10 @@ const Home = () => {
   return (
     <div className="mx-auto min-h-screen max-w-[1920px] bg-white">
       <div className="flex h-[1000px] w-full items-end justify-between">
-        <AddProject onStartAdd={handleStartAddProject} />
+        <AddProject
+          onStartAdd={handleStartAddProject}
+          projects={projectState.projects}
+        />
         <div className="h-[950px] w-full border-2 pl-10">{content}</div>
       </div>
     </div>
