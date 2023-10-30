@@ -1,4 +1,4 @@
-import Input from "./Input";
+import Input from "./Input.jsx";
 import { useRef } from "react";
 //按下Save的時候要擷取所有input的value，再把value往父層傳
 //在這一層下ref，用props的方式傳給Input來接收下層的value，Input層下forwardRef
@@ -11,14 +11,14 @@ const NewProject = ({ onAdd }) => {
     const enteredTitle = title.current.value;
     const enteredDescription = description.current.value;
     const enteredDate = date.current.value;
-    onAdd = {
+    onAdd({
       title: enteredTitle,
       description: enteredDescription,
       date: enteredDate,
-    };
+    });
   };
   return (
-    <div className="">
+    <>
       <div className="mt-16 flex justify-end">
         <button className="rounded-lg px-8 py-4 text-gray-400 hover:bg-slate-300">
           Cancel
@@ -35,7 +35,7 @@ const NewProject = ({ onAdd }) => {
         <Input ref={description} label="Description" textarea />
         <Input ref={date} label="Due Date" type="date" />
       </div>
-    </div>
+    </>
   );
 };
 

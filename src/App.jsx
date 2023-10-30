@@ -1,6 +1,6 @@
-import AddProject from "./component/AddProject";
-import NewProject from "./component/NewProject";
-import NoProjectSelected from "./component/NoProjectSelected";
+import AddProject from "./component/AddProject.jsx";
+import NewProject from "./component/NewProject.jsx";
+import NoProjectSelected from "./component/NoProjectSelected.jsx";
 import { useState } from "react";
 
 const Home = () => {
@@ -28,6 +28,7 @@ const Home = () => {
     });
   };
   console.log(projectState);
+
   let content;
   if (projectState.selectedProjectId === null) {
     content = <NewProject onAdd={handleAddProject} />;
