@@ -1,4 +1,4 @@
-const NoProjectSelected = () => {
+const NoProjectSelected = ({ onStartAdd }) => {
   return (
     <div className=" mt-[200px]  flex flex-col items-center gap-4 text-center">
       <svg
@@ -19,7 +19,10 @@ const NoProjectSelected = () => {
       <p className="mb-1 text-gray-400">
         select a project or get started with a new one
       </p>
-      <button className="rounded-lg bg-gray-800 px-3 py-2 text-gray-400 hover:bg-gray-700">
+      <button
+        className="rounded-lg bg-gray-800 px-3 py-2 text-gray-400 hover:bg-gray-700"
+        onClick={onStartAdd}
+      >
         Create new project
       </button>
     </div>
