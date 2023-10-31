@@ -20,6 +20,17 @@ const Home = () => {
       return { ...prevState, selectedProjectId: undefined };
     });
   };
+  const handleDelete = () => {
+    setProjectState((prevState) => {
+      return {
+        ...prevState,
+        selectedProjectId: undefined,
+        projects: prevState.projects.filter(
+          (project) => project.id !== prevState.selectedProjectId
+        ),
+      };
+    });
+  };
   const handleSelected = (id) => {
     setProjectState((prevState) => {
       return { ...prevState, selectedProjectId: id };
@@ -42,7 +53,9 @@ const Home = () => {
   const selectedProject = projectState.projects.find(
     (project) => project.id === projectState.selectedProjectId
   );
-  let content = <SelectedProject project={selectedProject} />;
+  let content = (
+    <SelectedProject project={selectedProject} onDelete={handleDelete} />
+  );
   if (projectState.selectedProjectId === null) {
     content = <NewProject onAdd={handleAddProject} onCancel={handleCancel} />;
   } else if (projectState.selectedProjectId === undefined) {
@@ -51,7 +64,7 @@ const Home = () => {
 
   return (
     <div className="mx-auto min-h-screen max-w-[1920px] bg-white">
-      <div className="flex h-[1000px] w-full items-end justify-between">
+      <div className="flex h-[1000px] w-[1200px] items-end justify-between">
         <AddProject
           onStartAdd={handleStartAddProject}
           projects={projectState.projects}
