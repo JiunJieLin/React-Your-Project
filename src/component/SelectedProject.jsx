@@ -1,3 +1,5 @@
+import Task from "../Task.jsx";
+
 const SelectedProject = ({ project, onDelete }) => {
   const formattedDate = new Date(project.date).toLocaleDateString("en-US", {
     year: "numeric",
@@ -23,7 +25,8 @@ const SelectedProject = ({ project, onDelete }) => {
           {project.description}
         </p>
       </header>
-      Task
+      <div className="my-6 w-[700px] border-b-2"></div>
+      <Task />
     </div>
   );
 };
