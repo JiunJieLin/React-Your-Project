@@ -8,8 +8,30 @@ const Home = () => {
   const [projectState, setProjectState] = useState({
     selectedProjectId: undefined,
     projects: [],
+    tasks: [],
   });
-
+  const handleAddTask = (text) => {
+    setProjectState((prevState) => {
+      const TaskId = Math.random();
+      const newTask = {
+        text: text,
+        projectId: prevState.selectedProjectId,
+        id: TaskId,
+      };
+      return {
+        ...prevState,
+        tasks: [...prevState.tasks, newTask],
+      };
+    });
+  };
+  const handleDeleteTask = (id) => {
+    setProjectState((prevState) => {
+      return {
+        ...prevState,
+        tasks: prevState.tasks.filter((task) => task.id !== id),
+      };
+    });
+  };
   const handleStartAddProject = () => {
     setProjectState((prevState) => {
       return { ...prevState, selectedProjectId: null };
@@ -54,7 +76,13 @@ const Home = () => {
     (project) => project.id === projectState.selectedProjectId
   );
   let content = (
-    <SelectedProject project={selectedProject} onDelete={handleDelete} />
+    <SelectedProject
+      project={selectedProject}
+      onDelete={handleDelete}
+      onAddTask={handleAddTask}
+      onDeleteTask={handleDeleteTask}
+      tasks={projectState.tasks}
+    />
   );
   if (projectState.selectedProjectId === null) {
     content = <NewProject onAdd={handleAddProject} onCancel={handleCancel} />;
@@ -71,7 +99,7 @@ const Home = () => {
           onSelected={handleSelected}
           selectedId={projectState.selectedProjectId}
         />
-        <div className="h-[950px] w-full border-2 pl-10">{content}</div>
+        <div className="h-[950px] w-full  pl-10">{content}</div>
       </div>
     </div>
   );
