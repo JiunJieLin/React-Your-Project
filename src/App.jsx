@@ -2,6 +2,7 @@ import AddProject from "./component/AddProject.jsx";
 import NewProject from "./component/NewProject.jsx";
 import NoProjectSelected from "./component/NoProjectSelected.jsx";
 import { useState } from "react";
+import SelectedProject from "./component/SelectedProject.jsx";
 
 const Home = () => {
   const [projectState, setProjectState] = useState({
@@ -19,6 +20,11 @@ const Home = () => {
       return { ...prevState, selectedProjectId: undefined };
     });
   };
+  const handleSelected = (id) => {
+    setProjectState((prevState) => {
+      return { ...prevState, selectedProjectId: id };
+    });
+  };
   const handleAddProject = (projectData) => {
     setProjectState((prevState) => {
       const newProject = {
@@ -33,18 +39,23 @@ const Home = () => {
     });
   };
 
-  let content;
+  const selectedProject = projectState.projects.find(
+    (project) => project.id === projectState.selectedProjectId
+  );
+  let content = <SelectedProject project={selectedProject} />;
   if (projectState.selectedProjectId === null) {
     content = <NewProject onAdd={handleAddProject} onCancel={handleCancel} />;
   } else if (projectState.selectedProjectId === undefined) {
     content = <NoProjectSelected onStartAdd={handleStartAddProject} />;
   }
+
   return (
     <div className="mx-auto min-h-screen max-w-[1920px] bg-white">
       <div className="flex h-[1000px] w-full items-end justify-between">
         <AddProject
           onStartAdd={handleStartAddProject}
           projects={projectState.projects}
+          onSelected={handleSelected}
         />
         <div className="h-[950px] w-full border-2 pl-10">{content}</div>
       </div>
