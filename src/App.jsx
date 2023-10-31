@@ -56,6 +56,7 @@ const Home = () => {
           onStartAdd={handleStartAddProject}
           projects={projectState.projects}
           onSelected={handleSelected}
+          selectedId={projectState.selectedProjectId}
         />
         <div className="h-[950px] w-full border-2 pl-10">{content}</div>
       </div>
